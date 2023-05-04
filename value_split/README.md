@@ -258,4 +258,4 @@ Well, as long as you continue using the new style.
 
 If you want to take a look at the workflow used to generate all the files in
 this example please take a look at:
-[.github/workflows/update-value-split.yml](../.github/workflows/update-value-split.yml)
+[workflows/update-value-split.yml](../workflows/update-value-split.yml)
