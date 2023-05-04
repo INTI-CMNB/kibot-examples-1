@@ -15,7 +15,7 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
-    container: ghcr.io/inti-cmnb/kicad_auto_test:ki7
+    container: ghcr.io/inti-cmnb/kicad7_auto_full:dev
 
     steps:
       - name: Checkout
@@ -24,4 +24,5 @@ jobs:
       - name: Run KiBot
         run: |
           cd value_split
-          kibot -d Generated
+          kibot -c resources.kibot.yaml
+          kibot -c value_split_replace.kibot.yaml
