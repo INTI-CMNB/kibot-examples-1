@@ -264,7 +264,7 @@
     (property "Reference" "L1" (id 0) (at 77.597 78.8162 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "3,3 nH" (id 1) (at 77.597 81.1784 0)
+    (property "Value" "3.3 nH" (id 1) (at 77.597 81.1784 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "" (id 2) (at 76.2 80.01 0)
@@ -317,7 +317,7 @@
       (reference "C2") (unit 1) (value "100 pF") (footprint "")
     )
     (path "/00000000-0000-0000-0000-0000645261a6"
-      (reference "L1") (unit 1) (value "3,3 nH") (footprint "")
+      (reference "L1") (unit 1) (value "3.3 nH") (footprint "")
     )
     (path "/00000000-0000-0000-0000-0000645266d9"
       (reference "L2") (unit 1) (value "1 nH") (footprint "")
