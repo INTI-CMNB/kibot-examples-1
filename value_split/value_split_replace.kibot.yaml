@@ -1,0 +1,11 @@
+kibot:
+  version: 1
+
+outputs:
+  - name: value_split
+    comment: "Split the Value and replace it"
+    type: sch_variant
+    dir: Modified
+    options:
+      pre_transform: _value_split_replace
+      copy_project: true

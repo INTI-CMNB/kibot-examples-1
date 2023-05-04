@@ -1,18 +1,35 @@
-# Example KiBot config file
+# Create the resources for the example
 kibot:
   version: 1
+
+global:
+  # Destination directory for all the generated files
+  dir: Generated
+  # The names will use this pattern, i.e. sch_original.pdf
+  output: sch_%I.%x
 
 outputs:
   - name: 'original_pdf'
     comment: "Print original schematic (PDF)"
     type: pdf_sch_print
-    dir: .
-    options:
-      output: sch_original.pdf
+    output_id: original
 
   - name: 'original_sch'
     comment: "Print original schematic (SVG)"
     type: svg_sch_print
-    dir: .
+    output_id: original
+
+  - name: 'replace_pdf'
+    comment: "Print replace schematic (PDF)"
+    type: pdf_sch_print
+    output_id: replace
     options:
-      output: sch_original.svg
+      # We can just use a built-in filter
+      pre_transform: _value_split_replace
+
+  - name: 'replace_sch'
+    comment: "Print replace schematic (SVG)"
+    type: svg_sch_print
+    output_id: replace
+    options:
+      pre_transform: _value_split_replace

@@ -23,8 +23,8 @@ the `Value` field to a schematic that uses separated fields.
 
 ## Example explanation
 
-We'll use a simple [example](value_split.kicad_sch) where we have the following
-components:
+We'll use a simple example ([value_split.kicad_sch](value_split.kicad_sch))
+where we have the following components:
 
 - C1: 1uF 0603 ±30%
 - C2: 100p 0805 NPO 50V
@@ -60,3 +60,28 @@ C |    X    |       |     X     |     X     |    X    |
 
 
 ## Example configuration
+
+We will generate a new schematic with the `Value` replaced and the extra
+information in separated fields. This functionality can be achieved using
+the **_value_split_replace** internal filter.
+
+Here is a configuration [example](value_split_replace.kibot.yaml):
+
+```yaml
+kibot:
+  version: 1
+
+outputs:
+  - name: value_split
+    comment: "Split the Value and replace it"
+    type: sch_variant
+    dir: Modified
+    options:
+      pre_transform: _value_split_replace
+      copy_project: true
+```
+
+This will generate a new schematic
+[Modified/value_split.kicad_sch](Modified/value_split.kicad_sch):
+
+[![Replaced schematic](Generated/sch_replace.svg)](Generated/sch_replace.pdf)
