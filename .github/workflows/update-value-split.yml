@@ -26,3 +26,5 @@ jobs:
           cd value_split
           kibot -c resources.kibot.yaml
           kibot -c value_split_replace.kibot.yaml
+          kibot -c value_split_no_replace.kibot.yaml
+          kibot -c value_split_custom.kibot.yaml

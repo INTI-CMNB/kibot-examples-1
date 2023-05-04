@@ -1,0 +1,45 @@
+kibot:
+  version: 1
+
+global:
+  field_temp_coef: characteristic
+
+filters:
+  - name: value_split_filter
+    comment: 'Create fields from the value'
+    type: value_split
+    # [string='Value'] Name of the field to use as source of information.
+    # source: 'Value'
+    #
+    # We can disable any of the generated fields
+    # yes = overwrite existing value
+    # no = don't touch
+    # soft = copy if not defined
+    #
+    # package = 'yes'
+    # power = 'yes'
+    # temp_coef = 'yes'
+    # tolerance: 'yes'
+    # voltage = 'yes'
+    #
+    # The following options affects the resulting aspect
+    #
+    # [boolean=true] Replace the content of the source field using a
+    # normalized representation of the interpreted value.
+    replace_source: false
+    # [boolean=true] Try to figure out the position for the added fields.
+    # autoplace: True
+    # [string='bottom'] [bottom,top] Put the new field at the bottom/top of
+    # the last field.
+    # autoplace_mechanism: 'bottom'
+    # [boolean=false] Make visible the modified fields.
+    visible: true
+
+outputs:
+  - name: value_split
+    comment: "Split the Value"
+    type: sch_variant
+    dir: Modified_custom
+    options:
+      pre_transform: value_split_filter
+      copy_project: true

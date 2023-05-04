@@ -59,7 +59,7 @@ L |    X    |       |           |     X     |    X    |
 C |    X    |       |     X     |     X     |    X    |
 
 
-## Example configuration
+## Example configuration for replace
 
 We will generate a new schematic with the `Value` replaced and the extra
 information in separated fields. This functionality can be achieved using
@@ -85,3 +85,109 @@ This will generate a new schematic
 [Modified/value_split.kicad_sch](Modified/value_split.kicad_sch):
 
 [![Replaced schematic](Generated/sch_replace.svg)](Generated/sch_replace.pdf)
+
+In this example you'll see the following:
+
+- The new fields are visible, this is controlled by the `visible` option.
+- The new fields are automatically placed, controlled by `autoplace` and
+  `autoplace_mechanism` options.
+- The R2 tolerance and L2 voltage fields looks wrongly placed. This is because
+  the original file already contained these fields. KiBot won't move fields
+  that are already defined.
+- The new `Value` was replaced by a normalized representation. This makes them
+  uniform and easy to read.
+- **NPO** was replaced by **C0G**. KiBot will make things as uniform as
+  possible. This means that things like **np0**, **COG**, **npO**, etc. will
+  all be replaced by **C0G**.
+
+
+## Example configuration no replace
+
+A second internal filter covers the case where you want to extract the
+information to new fields, but you don't want to change the visual aspect of
+the schematic.
+
+Here is a configuration [example](value_split_no_replace.kibot.yaml):
+
+```yaml
+kibot:
+  version: 1
+
+outputs:
+  - name: value_split
+    comment: "Split the Value"
+    type: sch_variant
+    dir: Modified_no_replace
+    options:
+      pre_transform: _value_split
+      copy_project: true
+```
+
+This will generate a new schematic
+[Modified_no_replace/value_split.kicad_sch](Modified_no_replace/value_split.kicad_sch)
+
+It looks exactly the same as the original, but when you edit R1 you'll see:
+
+![R1 attributes](R1.png)
+
+
+## Example of customized configuration
+
+Here we'll see an example where we want to avoid replacing the `Value`, but we
+want to make the fields visible. We'll also change the name of the `temp_coef`
+field to be `characteristic`.
+
+Here is a configuration [example](value_split_custom.kibot.yaml):
+
+```yaml
+kibot:
+  version: 1
+
+global:
+  field_temp_coef: characteristic
+
+filters:
+  - name: value_split_filter
+    comment: 'Create fields from the value'
+    type: value_split
+    # [string='Value'] Name of the field to use as source of information.
+    # source: 'Value'
+    #
+    # We can disable any of the generated fields
+    # yes = overwrite existing value
+    # no = don't touch
+    # soft = copy if not defined
+    #
+    # package = 'yes'
+    # power = 'yes'
+    # temp_coef = 'yes'
+    # tolerance: 'yes'
+    # voltage = 'yes'
+    #
+    # The following options affects the resulting aspect
+    #
+    # [boolean=true] Replace the content of the source field using a
+    # normalized representation of the interpreted value.
+    replace_source: false
+    # [boolean=true] Try to figure out the position for the added fields.
+    # autoplace: True
+    # [string='bottom'] [bottom,top] Put the new field at the bottom/top of
+    # the last field.
+    # autoplace_mechanism: 'bottom'
+    # [boolean=false] Make visible the modified fields.
+    visible: true
+
+outputs:
+  - name: value_split
+    comment: "Split the Value"
+    type: sch_variant
+    dir: Modified_custom
+    options:
+      pre_transform: value_split_filter
+      copy_project: true
+```
+
+This will generate a new schematic
+[Modified_custom/value_split.kicad_sch](Modified_custom/value_split.kicad_sch):
+
+[![Custom schematic](Generated/sch_custom.svg)](Generated/sch_custom.pdf)

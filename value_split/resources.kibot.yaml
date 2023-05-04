@@ -8,6 +8,13 @@ global:
   # The names will use this pattern, i.e. sch_original.pdf
   output: sch_%I.%x
 
+filters:
+  - name: value_split_filter
+    comment: 'Create fields from the value'
+    type: value_split
+    replace_source: false
+    visible: true
+
 outputs:
   - name: 'original_pdf'
     comment: "Print original schematic (PDF)"
@@ -33,3 +40,18 @@ outputs:
     output_id: replace
     options:
       pre_transform: _value_split_replace
+
+  - name: 'custom_pdf'
+    comment: "Print custom schematic (PDF)"
+    type: pdf_sch_print
+    output_id: custom
+    options:
+      # We can just use a built-in filter
+      pre_transform: value_split_filter
+
+  - name: 'custom_sch'
+    comment: "Print custom schematic (SVG)"
+    type: svg_sch_print
+    output_id: custom
+    options:
+      pre_transform: value_split_filter
