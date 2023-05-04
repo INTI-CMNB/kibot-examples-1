@@ -28,3 +28,5 @@ jobs:
           kibot -c value_split_replace.kibot.yaml
           kibot -c value_split_no_replace.kibot.yaml
           kibot -c value_split_custom.kibot.yaml
+          kibot -c bom_original.kibot.yaml
+          kibot -c bom_replace.kibot.yaml

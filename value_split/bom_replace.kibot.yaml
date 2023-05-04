@@ -1,0 +1,18 @@
+kibot:
+  version: 1
+
+outputs:
+  - name: 'bom'
+    comment: "Bill of Materials in HTML format"
+    type: bom
+    dir: BoM_replaced
+    options:
+      columns:
+        - Row
+        - References
+        - Part
+        - field: Value
+          join: ['package', 'voltage', 'tolerance', 'temp_coef', 'power']
+        - Quantity Per PCB
+      format: HTML
+      pre_transform: _value_split_replace

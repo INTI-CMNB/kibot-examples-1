@@ -191,3 +191,71 @@ This will generate a new schematic
 [Modified_custom/value_split.kicad_sch](Modified_custom/value_split.kicad_sch):
 
 [![Custom schematic](Generated/sch_custom.svg)](Generated/sch_custom.pdf)
+
+
+## BoM implicances
+
+One of the reasons people puts all the information in the `Value` field is to
+get all the information in the BoM. But this isn't needed when using KiBot
+because you can join various fields in the same BoM column.
+
+Here is a simple [configuration](bom_original.kibot.yaml) to generate the BoM
+for the original schematic:
+
+```yaml
+kibot:
+  version: 1
+
+outputs:
+  - name: 'bom'
+    comment: "Bill of Materials in HTML format"
+    type: bom
+    dir: BoM_original
+    options:
+      columns:
+        - Row
+        - References
+        - Part
+        - Value
+        - Quantity Per PCB
+      format: HTML
+```
+
+It generates the following [BoM](BoM_original/value_split-bom.html)
+
+And here is an [equivalent](bom_replace.kibot.yaml) for the schematic when we
+apply the filter:
+
+```yaml
+kibot:
+  version: 1
+
+outputs:
+  - name: 'bom'
+    comment: "Bill of Materials in HTML format"
+    type: bom
+    dir: BoM_replaced
+    options:
+      columns:
+        - Row
+        - References
+        - Part
+        - field: Value
+          join: ['package', 'voltage', 'tolerance', 'temp_coef', 'power']
+        - Quantity Per PCB
+      format: HTML
+      pre_transform: _value_split_replace
+```
+
+Which generates an equivalent [BoM](BoM_replaced/value_split-bom.html)
+
+Note that here we are applying the transformation to the original schematic.
+In practice you should apply the transformation and then continue working with
+the new schematic. In this case you no longer need to apply the transformation.
+Well, as long as you continue using the new style.
+
+## Workflow example
+
+If you want to take a look at the workflow used to generate all the files in
+this example please take a look at:
+[.github/workflows/update-value-split.yml](../.github/workflows/update-value-split.yml)

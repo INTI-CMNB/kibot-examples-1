@@ -1,0 +1,16 @@
+kibot:
+  version: 1
+
+outputs:
+  - name: 'bom'
+    comment: "Bill of Materials in HTML format"
+    type: bom
+    dir: BoM_original
+    options:
+      columns:
+        - Row
+        - References
+        - Part
+        - Value
+        - Quantity Per PCB
+      format: HTML
