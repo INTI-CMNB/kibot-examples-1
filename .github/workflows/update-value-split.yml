@@ -30,3 +30,10 @@ jobs:
           kibot -c value_split_custom.kibot.yaml
           kibot -c bom_original.kibot.yaml
           kibot -c bom_replace.kibot.yaml
+
+      - name: Commit results
+        run: |
+          git config --global user.name 'Salvador E. Tropea'
+          git config --global user.email 'set@ieee.org'
+          git commit -am "KiBot generated updated"
+          git push
