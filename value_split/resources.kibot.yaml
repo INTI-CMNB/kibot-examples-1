@@ -1,0 +1,18 @@
+# Example KiBot config file
+kibot:
+  version: 1
+
+outputs:
+  - name: 'original_pdf'
+    comment: "Print original schematic (PDF)"
+    type: pdf_sch_print
+    dir: .
+    options:
+      output: sch_original.pdf
+
+  - name: 'original_sch'
+    comment: "Print original schematic (SVG)"
+    type: svg_sch_print
+    dir: .
+    options:
+      output: sch_original.svg

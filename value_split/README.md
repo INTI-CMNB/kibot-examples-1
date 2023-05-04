@@ -31,6 +31,8 @@ We'll you a simple example where we have the following components:
 - L1: 3n3 0603 10%
 - L2: 1nH 100V
 
+[![Original schematic](Generated/sch_original.svg)](Generated/sch_original.pdf)
+
 We want to replace the `Value` field by just the component value, and move the
 extra information to additional fields. Note that you can keep the original
 value.
@@ -49,7 +51,7 @@ Here is a table showing which attributes are currently supported for each
 type of component:
 
   | package | power | temp_coef | tolerance | voltage |
-- | ------- | ----- | --------- | --------- | ------- |
+--|---------|-------|-----------|-----------|---------|
 R |    X    |   X   |           |     X     |         |
 L |    X    |       |           |     X     |    X    |
 C |    X    |       |     X     |     X     |    X    |
