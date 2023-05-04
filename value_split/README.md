@@ -20,9 +20,11 @@ the `Value` field to a schematic that uses separated fields.
 - References must follow common practice guidelines. I.e. resistors uses R or
   RV when variable, capacitors uses C and inductors L.
 
+
 ## Example explanation
 
-We'll you a simple example where we have the following components:
+We'll use a simple [example](value_split.kicad_sch) where we have the following
+components:
 
 - C1: 1uF 0603 ±30%
 - C2: 100p 0805 NPO 50V
@@ -57,3 +59,4 @@ L |    X    |       |           |     X     |    X    |
 C |    X    |       |     X     |     X     |    X    |
 
 
+## Example configuration
